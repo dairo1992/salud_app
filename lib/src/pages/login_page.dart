@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:salud_app/src/global/environment.dart';
+import 'package:salud_app/src/helpers/mostrar_alerta.dart';
 import 'package:salud_app/src/widgets/custom_button.dart';
 import 'package:salud_app/src/widgets/custom_input.dart';
 import 'package:salud_app/src/widgets/header_auth_custom.dart';
@@ -71,8 +72,12 @@ class _FormStateState extends State<_FormState> {
               color: Environments.colorRed,
               label: 'Ingresar',
               onPressed: () {
-                print(
-                    'Usuario: ${emailCtrl.text} - Contraseña: ${passCtrl.text}');
+                if (emailCtrl.text != '' && passCtrl.text != '') {
+                  Navigator.pushReplacementNamed(context, 'home');
+                } else {
+                  mostrarAlerta(
+                      context, 'login Incorrecto', 'revise sus credenciales');
+                }
               })
         ],
       ),
